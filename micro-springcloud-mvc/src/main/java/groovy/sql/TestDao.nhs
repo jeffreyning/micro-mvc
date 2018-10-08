@@ -10,11 +10,16 @@ select * from micro_test
 <%! </sql> %>
 
 <%! <sql id="insertInfo"> %>
-insert into micro_test(id,meta_key) values( 
-?			
-<% repList.add(paramArray[0].get("id"));%>
-,?		
-<% repList.add(paramArray[0].get("meta_key"));%>	
+insert into micro_test(
+<% if(paramArray[0].get("id")!=null){ %>
+id,
+<% 	} %>
+meta_key) values( 
+<% if(paramArray[0].get("id")!=null){ %>		
+	#{paramArray[0].id} ,			
+<% 	} %>
+
+#{paramArray[0].get("meta_key")}	
 	)
 <%! </sql> %>
  

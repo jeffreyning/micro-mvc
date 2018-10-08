@@ -9,20 +9,29 @@ import com.nh.micro.service.InjectGroovy;
 import com.nh.micro.template.MicroDbProxy;
 import com.nh.micro.template.MicroTMProxy;
 
+import foo.dto.MicroTestDto;
 import foo.service.TestService;
 
-@MicroAop(name=[MicroDefaultLogProxy.class,MicroTMProxy.class,MicroDbProxy.class], property=["","",""])
+
 class TestController  {  
 	@Resource
 	public TestService testService;
 	
 
-	public Map echo(String str,HttpServletRequest httpRequest) {
+	public Map echo(String id) {
 		System.out.println("this is controller proxy");
-		testService.test("111");
+		MicroTestDto data=testService.test(id);
+		Map retMap=new HashMap();
+		retMap.put("status", "0");
+		retMap.put("data", data);
+		return retMap;
+	}
+	
+	public Map create() {
+		System.out.println("this is controller proxy");
+		testService.create();
 		Map retMap=new HashMap();
 		retMap.put("status", "0");
 		return retMap;
 	}
-
 }

@@ -3,6 +3,7 @@ package foo.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.nh.micro.dao.mapper.InjectDao;
 import com.nh.micro.dao.mapper.ListInnerClass;
 import com.nh.micro.dao.mapper.MicroCommonMapper;
 import com.nh.micro.dao.mapper.MicroPageInfo;
@@ -16,6 +17,7 @@ import foo.dto.MicroTestDto;
  * @author ninghao
  *
  */
+@InjectDao
 @MicroDbName
 public interface TestDao extends MicroCommonMapper<MicroTestDto> {
 	

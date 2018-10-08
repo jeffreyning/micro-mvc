@@ -21,7 +21,9 @@ public interface TestController {
 	
 @RequestMapping("echo")
 @ResponseBody
-public  Map echo(@RequestParam(value="str") String str,HttpServletRequest httpRequest);
+public  Map echo(@RequestParam(value="id") String id);
 
-
+@RequestMapping("create")
+@ResponseBody
+public  Map create();
 }

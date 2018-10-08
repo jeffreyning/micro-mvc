@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nh.micro.dao.mapper.DefaultPageInfo;
@@ -33,28 +34,35 @@ import com.nh.micro.template.MicroTMProxy;
  * @author ninghao
  *
  */
-@MicroAop(name=[MicroDefaultLogProxy.class,MicroTMProxy.class,MicroDbProxy.class], property=["","",""])
+//@MicroAop(name=[MicroDefaultLogProxy.class,MicroTMProxy.class,MicroDbProxy.class], property=["","",""])
 class TestService  {  
 	
-	@Resource
+	@Autowired
 	public TestDao testDao;
  
 
-	public void test(String id){
+	public MicroTestDto test(String id){
 		
 		Map paramMap=new HashMap();
 		paramMap.put("id", id);
 		MicroTestDto microTestDto=testDao.queryInfoById(paramMap);
 
-		List<MicroTestDto> list=testDao.getInfoListAllMapper(microTestDto, ""); 
+/*		List<MicroTestDto> list=testDao.getInfoListAllMapper(microTestDto, ""); 
 		
 		DefaultPageInfo pageInfo=new DefaultPageInfo();
 		pageInfo.setPageNo(1);
 		List<MicroTestDto> retList=testDao.queryInfosByPage(paramMap, pageInfo);
 		Long total=pageInfo.getTotal();
-		System.out.println("total="+total);
+		System.out.println("total="+total);*/
+		return microTestDto;
 		
 		
+	}
+	
+	public void create(){
+		Map paramMap=new HashMap();
+		paramMap.put("meta_key", (new Date()).toString());
+		testDao.insertInfo(paramMap);
 	}
 
 }

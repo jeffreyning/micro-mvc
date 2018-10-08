@@ -22,32 +22,21 @@
 	<bean class="com.nh.micro.service.GroovyBeanScannerConfigurer">
 		<property name="scanPath" value="foo.web"></property>
 	</bean>
-	<!-- 配置微服务加载时插件（非必须配置） -->
+	<!-- 配置微服务加载时插件 -->
 
-	<bean id="microAopPlugin" class="com.nh.micro.rule.engine.core.plugin.MicroAopPlugin"
-		lazy-init="false"></bean>
-	<bean id="microInjectPlugin" class="com.nh.micro.rule.engine.context.MicroInjectPlugin"
-		lazy-init="false"></bean>
-	<bean id="microInjectGroovyPlugin" class="com.nh.micro.service.MicroInjectGroovyPlugin"
-		lazy-init="false"></bean>
-
-	<bean id="microInjectDaoPlugin" class="com.nh.micro.dao.mapper.MicroInjectDaoPlugin"
+	<bean id="microInjectSpringPlugin" class="com.nh.micro.rule.engine.context.MicroInjectSpringPlugin"
 		lazy-init="false"></bean>
 	<bean id="groovyLoadUtil" class="com.nh.micro.rule.engine.core.GroovyLoadUtil"
 		lazy-init="false">
 		<property name="pluginList">
 			<list>
-
-				<ref bean="microAopPlugin" />
-				<ref bean="microInjectPlugin" />
-				<ref bean="microInjectGroovyPlugin" />
-				<ref bean="microInjectDaoPlugin" />
+				<ref bean="microInjectSpringPlugin" />
 			</list>
 		</property>
 	</bean>
 
 
-	<!-- 配置微服务全局变量（非必须配置） -->
+	<!-- 配置微服务全局变量 -->
 	<bean class="com.nh.micro.rule.engine.context.MicroContextHolder"
 		lazy-init="false">
 		<property name="contextMap">
@@ -56,19 +45,9 @@
 		</property>
 	</bean>
 
-	<!-- 配置微服务运行时插件（非必须配置） -->
-	<bean class="com.nh.micro.rule.engine.core.GroovyAopChain"
-		init-method="init">
-		<property name="handlerList">
-			<list>
-			</list>
-		</property>
-	</bean>
-
-
 	<!-- 启动时加载groovy -->
 	<bean id="groovyInitUtil" class="com.nh.micro.rule.engine.core.GroovyInitUtil"
-		init-method="initGroovy" lazy-init="false" depends-on="gitSync">
+		init-method="initGroovyAndThread" lazy-init="false">
 		<property name="fileList">
 			<list>
 				<bean class="com.nh.micro.rule.engine.core.GFileBean">
@@ -77,26 +56,9 @@
 					<property name="dirFlag" value="true"></property>
 					<property name="rulePath" value="/groovy/"></property>
 				</bean>
-				<bean class="com.nh.micro.rule.engine.core.GFileBean">
-					<property name="ruleStamp" value="true"></property>
-					<property name="jarFileFlag" value="false"></property>
-					<property name="dirFlag" value="true"></property>
-					<property name="rulePath" value="H:/temp/git/test-sync/groovy/"></property>
-				</bean>
 			</list>
 		</property>
 	</bean>
-
-	<bean id="gitSync" class="com.nh.micro.sync.git.MicroGitSync"
-		init-method="initRep" lazy-init="false">
-		<property name="localPath" value="h:/temp/git"></property>
-		<property name="remotePath"
-			value="https://github.com/nhmicro/test-sync-groovy.git"></property>
-		<property name="cloneFlag" value="true"></property>
-		<property name="openFlag" value="${openFlag}"></property>
-		<property name="version" value="head"></property>
-	</bean>
-
 
 	<!-- 配置微服务全局变量（使用微服务dao时必须配置） -->
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
@@ -127,35 +89,6 @@
 		</property>
 	</bean>
 
-	<!-- 定时更新groovy -->
-	<bean id="groovyLoadTimer" class="com.nh.micro.rule.engine.core.GroovyLoadTimer" />
-
-	<bean id="groovyLoadTimerDitail"
-		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="groovyLoadTimer"></property>
-		<property name="targetMethod" value="doJob"></property>
-	</bean>
-
-
-	<bean id="groovyLoadTimerTigger"
-		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="groovyLoadTimerDitail"></property>
-		<property name="cronExpression">
-			<value>0/5 * * * * ?</value>
-		</property>
-	</bean>
-
-
-	<!-- 启动定时器 -->
-	<bean id="startJob"
-		class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
-		autowire="no">
-		<property name="triggers">
-			<list>
-				<ref bean="groovyLoadTimerTigger" />
-			</list>
-		</property>
-	</bean>
 
 	<!-- micro-dao sql文件加载 -->
 	<bean class="com.nh.micro.nhs.NhsInitUtil" init-method="initGroovyAndThread"

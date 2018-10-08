@@ -144,22 +144,22 @@
 		<dependency>
 	  		<groupId>com.github.jeffreyning</groupId>
 	  		<artifactId>nh-micro-engine</artifactId>
-	  		<version>1.1.5-RELEASE</version>
+	  		<version>1.2.1-RELEASE</version>
 	  	</dependency>   	 
 		<dependency>
 	  		<groupId>com.github.jeffreyning</groupId>
 	  		<artifactId>nh-micro-db</artifactId>
-	  		<version>1.1.7-RELEASE</version>
+	  		<version>1.2.0-RELEASE</version>
 	  	</dependency>   	
 		<dependency>
 	  		<groupId>com.github.jeffreyning</groupId>
 	  		<artifactId>nh-micro-template</artifactId>
-	  		<version>1.1.7-RELEASE</version>
+	  		<version>1.2.7-RELEASE</version>
 	  	</dependency>  
 		<dependency>
 	  		<groupId>com.github.jeffreyning</groupId>
 	  		<artifactId>nh-micro-context</artifactId>
-	  		<version>1.1.5-RELEASE</version>
+	  		<version>1.1.8-RELEASE</version>
 	  	</dependency>   
 	  	<dependency>
 	  		<groupId>com.github.jeffreyning</groupId>
@@ -170,23 +170,23 @@
 		<dependency>
 			<groupId>com.github.jeffreyning</groupId>
 			<artifactId>micro-dao</artifactId>
-			<version>1.1.7-RELEASE</version>
+			<version>1.2.3-RELEASE</version>
 		</dependency>	  	
 
 		<dependency>
 		  <groupId>com.github.jeffreyning</groupId>
 		  <artifactId>nh-micro-controller</artifactId>
-		  <version>1.0.0-RELEASE</version>
+		  <version>1.0.5-RELEASE</version>
 		</dependency>  	
 		<dependency>
 			<groupId>com.github.jeffreyning</groupId>
 			<artifactId>nh-micro-service</artifactId>
-			<version>1.0.1-RELEASE</version>
+			<version>1.0.3-RELEASE</version>
 		</dependency> 
 		<dependency>
 		  <groupId>com.github.jeffreyning</groupId>
 		  <artifactId>nh-micro-nhs</artifactId>
-		  <version>1.0.1-RELEASE</version>
+		  <version>1.0.2-RELEASE</version>
 		</dependency>	
 
 		  	

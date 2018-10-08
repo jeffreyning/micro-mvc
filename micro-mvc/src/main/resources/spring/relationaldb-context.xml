@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd   http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
     <description>This is the relational database configuration for the applications.</description>
-
+	<tx:annotation-driven transaction-manager="txManager" /> 
     <bean id="jdbcPropertyPlaceHolder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreResourceNotFound" value="true"/>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
@@ -45,23 +45,23 @@
     </bean> 
 
     <!-- 声明式事物管理，配置事物管理advice-->
-     <tx:advice id="txAdvice" transaction-manager="txManager">
+<!--      <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
 
             <tx:method name="get*" read-only="true"/>
-<tx:method name="test*" propagation="REQUIRED"/>
+			<tx:method name="test*" propagation="REQUIRED"/>
             <tx:method name="add*" propagation="REQUIRED"/>
             <tx:method name="insert*" propagation="REQUIRED"/>
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="*"/>
         </tx:attributes>
-    </tx:advice> 
+    </tx:advice>  -->
 
     <!-- 配置事物管理advice作用范围与作用条件-->
-    <aop:config>
+<!--     <aop:config>
         <aop:pointcut id="serviceLayerTransaction" expression="execution( * foo.service.*..*(..))"/>
         <aop:advisor pointcut-ref="serviceLayerTransaction" advice-ref="txAdvice"/>
-    </aop:config> 
+    </aop:config>  -->
 
      
 </beans>
