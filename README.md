@@ -1,4 +1,5 @@
-micro-mvc框架，可以与springmvc和springcloud整合,使所有的controller、servicebean、dao和sql业务逻辑代码都支持热部署方便开发人员调式和生产部署。
+micro-mvc框架，可以与springmvc\springcloud\dubbo或其他基于spring的mvc框架整合,
+使所有的controller、servicebean、dao和sql业务逻辑代码都支持热部署方便开发人员调式和生产部署。
 
 
 **与springmvc整合过程**
@@ -50,7 +51,7 @@ import com.nh.micro.template.MicroTMProxy;
 
 import foo.service.TestService;
 
-@MicroAop(name=[MicroDefaultLogProxy.class,MicroTMProxy.class,MicroDbProxy.class], property=["","",""])
+
 class TestController  {  
 	@Resource
 	public TestService testService;
@@ -70,7 +71,7 @@ class TestController  {
 
 **配置controller层包扫描**
 
-使用GroovyBeanScannerConfigurer代替context:component-scan对controller进行扫描。
+使用GroovyBeanScannerConfigurer对controller的接口进行扫描（与component-scan不冲突可以重复配置，component-scan不会扫描接口）
 
 
 ```
@@ -119,7 +120,7 @@ import com.nh.micro.template.MicroDbProxy;
 import com.nh.micro.template.MicroServiceTemplateSupport;
 import com.nh.micro.template.MicroTMProxy;
 
-@MicroAop(name=[MicroDefaultLogProxy.class,MicroTMProxy.class,MicroDbProxy.class], property=["","",""])
+
 class TestService  {  
 	
 	@Resource
@@ -234,6 +235,7 @@ public class MicroTestDto {
 ```
 
 **编写Dao接口**
+被扫描的dao接口需要使用@InjectDao注解
 
 ```
 package foo.dao;
@@ -245,6 +247,7 @@ import com.nh.micro.dao.mapper.MicroPageInfo;
 import com.nh.micro.orm.MicroDbName;
 import foo.dto.MicroTestDto;
 
+@InjectDao
 @MicroDbName
 public interface TestDao extends MicroCommonMapper<MicroTestDto> {
 		public int updateInfo(Map paramMap);
@@ -373,13 +376,3 @@ SpringCloud整合controller，service、dao层与springmvc整合均一致。
 Micro-springcloud-mvc
 
 
-**Nhmicro的Aop机制**
-
-加载groovy时提供aop代理机制，默认提供事务aop和数据源切换aop
-事务aop，可在加载时，识别Transactional注解，实现事务控制。
-可自行别写特定功能代理。
-开启代理需要在groovy的类中设置MicroAop注解指定代理类
-
-```
-@MicroAop(name=[MicroDefaultLogProxy.class,MicroTMProxy.class,MicroDbProxy.class], property=["","",""])
-```
