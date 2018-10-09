@@ -34,4 +34,11 @@ class TestController  {
 		retMap.put("status", "0");
 		return retMap;
 	}
+	
+	public Map show() {
+		System.out.println("this is controller proxy");
+		Map retMap=new HashMap();
+		retMap.put("text", "this is show1");
+		return retMap;
+	}
 }

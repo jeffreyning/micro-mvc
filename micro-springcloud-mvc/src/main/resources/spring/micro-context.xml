@@ -10,15 +10,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<description>This is the micro configuration for the web applications.
 	</description>
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath*:flag.properties</value>
-			</list>
-		</property>
-		<property name="ignoreUnresolvablePlaceholders" value="true" />
-	</bean>
+
 	<bean class="com.nh.micro.service.GroovyBeanScannerConfigurer">
 		<property name="scanPath" value="foo.web"></property>
 	</bean>
@@ -52,9 +44,9 @@
 			<list>
 				<bean class="com.nh.micro.rule.engine.core.GFileBean">
 					<property name="ruleStamp" value="true"></property>
-					<property name="jarFileFlag" value="true"></property>
+					<property name="jarFileFlag" value="${groovy.jarFileFlag}"></property>
 					<property name="dirFlag" value="true"></property>
-					<property name="rulePath" value="/groovy/"></property>
+					<property name="rulePath" value="${groovy.rulePath}"></property>
 				</bean>
 			</list>
 		</property>
@@ -97,9 +89,9 @@
 			<list>
 				<bean class="com.nh.micro.rule.engine.core.GFileBean">
 					<property name="ruleStamp" value="true"></property>
-					<property name="jarFileFlag" value="true"></property>
+					<property name="jarFileFlag" value="${groovy.jarFileFlag}"></property>
 					<property name="dirFlag" value="true"></property>
-					<property name="rulePath" value="/groovy/"></property>
+					<property name="rulePath" value="${groovy.rulePath}"></property>
 				</bean>
 			</list>
 		</property>

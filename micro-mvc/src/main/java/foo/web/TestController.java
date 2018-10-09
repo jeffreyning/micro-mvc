@@ -26,4 +26,8 @@ public  Map echo(@RequestParam(value="id") String id);
 @RequestMapping("create")
 @ResponseBody
 public  Map create();
+
+@RequestMapping("show")
+@ResponseBody
+public  Map show();
 }
